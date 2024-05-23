@@ -4,20 +4,17 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class TestClientRMI implements ITestClientRMI {
+public class TestClientRMI extends UnicastRemoteObject implements ITestClientRMI {
 
-    public TestClientRMI() {
-        try {
-            UnicastRemoteObject.exportObject(this, 0);
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
+    public TestClientRMI() throws RemoteException {
+        super();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
         Registry registry;
         try {
-            registry = LocateRegistry.getRegistry();
+            //registry = LocateRegistry.getRegistry(5555);
+            registry = LocateRegistry.getRegistry("192.168.1.107", 5555);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

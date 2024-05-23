@@ -4,13 +4,16 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class TestServerRMI implements ITestServerRMI  {
-    public TestServerRMI() {
+public class TestServerRMI extends UnicastRemoteObject implements ITestServerRMI  {
+    public TestServerRMI() throws RemoteException {
+        super();
+        /*
         try {
             UnicastRemoteObject.exportObject(this, 0);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
+         */
     }
 
     public static void main(String[] args) {
